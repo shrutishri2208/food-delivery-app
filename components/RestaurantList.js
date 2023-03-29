@@ -15,7 +15,7 @@ const RestaurantList = () => {
   }, []);
 
   return (
-    <View className="mt-8">
+    <View className="mt-4">
       {loading ? (
         <Text>Loading...</Text>
       ) : (

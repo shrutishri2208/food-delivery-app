@@ -19,3 +19,16 @@ export const emptyCart = () => {
     type: ACTIONS.EMPTY_CART,
   };
 };
+
+export const increaseItem = (id) => {
+  return {
+    type: ACTIONS.INCREASE_ITEM,
+    payload: id,
+  };
+};
+export const decreaseItem = (id) => {
+  return {
+    type: ACTIONS.DECREASE_ITEM,
+    payload: id,
+  };
+};

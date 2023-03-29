@@ -4,9 +4,10 @@ import { MaterialIcons, FontAwesome, AntDesign } from "@expo/vector-icons";
 import Modal from "react-native-modal";
 import { urlFor } from "../sanity";
 import { useSelector, useDispatch } from "react-redux";
-import { addItem } from "../redux/cart/cartActions";
+import { addItem, increaseItem } from "../redux/cart/cartActions";
 
 const MenuItem = ({
+  _key,
   image,
   title,
   price,
@@ -62,13 +63,15 @@ const MenuItem = ({
         <Pressable
           className="items-center"
           onPress={() => {
-            dispatch(
-              addItem({
-                id: new Date().getTime().toString(),
-                title: title,
-                price: price,
-              })
-            );
+            console.log(title, _key);
+            dispatch(increaseItem(_key));
+            // dispatch(
+            //   addItem({
+            //     id: _key,
+            //     title: title,
+            //     price: price,
+            //   })
+            // );
           }}
         >
           <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">

@@ -78,11 +78,11 @@ const HomeScreen = () => {
           contentContainerStyle={{ paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
         >
-          <Options />
+          {/* <Options /> */}
           {/* <Featured /> */}
-          <ItemsList heading={"Top rated near you"} />
           <Categories />
-          <ItemsList heading={"30 mins or less!"} />
+          <ItemsList heading={"Top rated near you"} />
+          {/* <ItemsList heading={"30 mins or less!"} /> */}
           <RestaurantList />
         </ScrollView>
         <View className="h-12" style={styles.background}>

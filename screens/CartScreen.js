@@ -18,12 +18,19 @@ import React, { useEffect, useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
-import { emptyCart, deleteItem } from "../redux/cart/cartActions";
+import {
+  emptyCart,
+  deleteItem,
+  increaseItem,
+  decreaseItem,
+} from "../redux/cart/cartActions";
 
 const CartScreen = () => {
   const navigation = useNavigation();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  // const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
+  const cartCount = useSelector((state) => state.cart.cartCount);
+  console.log("IN CART SCREEN", cartCount);
   const extraCharges = 31 + 45;
   const finalCartTotal = cartTotal + extraCharges;
 
@@ -51,29 +58,66 @@ const CartScreen = () => {
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
         <View className="">
           <View className="bg-white mx-4 mt-4 rounded-xl">
-            <View style={styles.line} className="pb-5">
+            {/* <View style={styles.line} className="pb-5">
               {cartItems.map((item, index) => {
                 return (
                   <View
                     key={index}
                     className="flex-row justify-between p-5 pb-0"
                   >
-                    {/* <Text>{item.id}</Text> */}
                     <View>
                       <Text className="text-lg font-semibold text-gray-500">
                         {item.title}
                       </Text>
                     </View>
-                    <View>{item.count}</View>
+                    <View className="flex-row">
+                      <Button
+                        title="-"
+                        onPress={() => dispatch(decreaseItem(item.id))}
+                      />
+                      <Text>{cartCount[item.id]}</Text>
+                      <Button
+                        title="+"
+                        onPress={() => dispatch(increaseItem(item.id))}
+                      />
+                    </View>
                     <Text className="font-black text-lg">₹{item.price}</Text>
-                    {/* <Button
-                      title="DELETE"
-                      onPress={() => dispatch(deleteItem(item))}
-                    /> */}
+                  </View>
+                );
+              })}
+            </View> */}
+            <View style={styles.line} className="pb-5">
+              {cartCount.map((item, index) => {
+                return (
+                  <View
+                    key={index}
+                    className="flex-row justify-between p-5 pb-0"
+                  >
+                    <View>
+                      <Text className="text-lg font-semibold text-gray-500">
+                        {item.id}
+                      </Text>
+                    </View>
+                    <View className="flex-row">
+                      <Button
+                        title="-"
+                        onPress={() => dispatch(decreaseItem(item.id))}
+                      />
+                      <Text>{item.count}</Text>
+                      <Button
+                        title="+"
+                        onPress={() => {
+                          dispatch(increaseItem(item.id));
+                          console.log("INCREASE");
+                        }}
+                      />
+                    </View>
+                    <Text className="font-black text-lg">₹{item.price}</Text>
                   </View>
                 );
               })}
             </View>
+            <Button title="DELETE ALL" onPress={() => dispatch(emptyCart())} />
             <Pressable
               onPress={() => navigation.goBack()}
               className="flex-row items-center p-5"

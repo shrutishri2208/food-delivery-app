@@ -21,7 +21,7 @@ const ItemsList = ({ heading }) => {
   }, []);
 
   return (
-    <View className="mt-4">
+    <View className="my-4">
       <Text className="text-black text-xl font-bold">{heading}</Text>
       {loading ? (
         <Text>Loading...</Text>
@@ -30,6 +30,9 @@ const ItemsList = ({ heading }) => {
           horizontal
           contentContainerStyle={{ paddingVertical: 12, columnGap: 16 }}
         >
+          {featured.map((item) => {
+            return <Items key={item._id} {...item} />;
+          })}
           {featured.map((item) => {
             return <Items key={item._id} {...item} />;
           })}

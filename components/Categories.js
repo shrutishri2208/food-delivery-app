@@ -34,7 +34,7 @@ const Categories = () => {
         <Text>Loading...</Text>
       ) : (
         <View>
-          <Text className="text-black text-xl font-bold mt-8">
+          <Text className="text-black text-xl font-bold ">
             What's on your mind?
           </Text>
           <ScrollView
