@@ -17,7 +17,6 @@ const MenuItem = ({
 }) => {
   const [isModal, setIsModal] = useState(false);
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cartItems);
 
   return (
     <View
@@ -63,7 +62,13 @@ const MenuItem = ({
         <Pressable
           className="items-center"
           onPress={() => {
-            dispatch(addItem(title));
+            dispatch(
+              addItem({
+                id: new Date().getTime().toString(),
+                title: title,
+                price: price,
+              })
+            );
           }}
         >
           <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">

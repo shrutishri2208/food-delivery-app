@@ -16,11 +16,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
-  const cart = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartTotal = useSelector((state) => state.cart.cartTotal);
   const {
     params: {
-      _id,
-      image,
       title,
       ratings,
       noOfRatings,
@@ -111,11 +110,13 @@ const RestaurantScreen = () => {
           </View>
         </View>
       </ScrollView>
-      {cart.length !== 0 && (
+      {cartItems.length !== 0 && (
         <View className="absolute bottom-20 left-0 right-0 mx-2">
           <View className="bg-green-700 flex-row justify-between p-4 rounded-2xl">
             <View>
-              <Text className="text-white">{cart.length} items | Price</Text>
+              <Text className="text-white">
+                {cartItems.length} items | {cartTotal}
+              </Text>
               <Text className="text-white text-xs">
                 Extra charges may apply
               </Text>
