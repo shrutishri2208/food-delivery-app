@@ -17,10 +17,9 @@ import { useSelector, useDispatch } from "react-redux";
 const RestaurantScreen = () => {
   const navigation = useNavigation();
   // const cartItems = useSelector((state) => state.cart.cartItems);
-  // const cartTotal = useSelector((state) => state.cart.cartTotal);
-  const cartCount = useSelector((state) => state.cart.cartCount);
+  const cartTotal = useSelector((state) => state.cart.cartTotal);
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
-  console.log("IN RESTAURANT SCREEN", cartCount);
   const {
     params: {
       _id,
@@ -137,11 +136,13 @@ const RestaurantScreen = () => {
           </View>
         </View>
       )} */}
-      {cartCount.length !== 0 && (
+      {cartItems.length !== 0 && (
         <View className="absolute bottom-20 left-0 right-0 mx-2">
           <View className="bg-green-700 flex-row justify-between p-4 rounded-2xl">
             <View>
-              <Text className="text-white">{cartCount.length} items</Text>
+              <Text className="text-white font-bold text-lg">
+                ₹{cartTotal}{" "}
+              </Text>
               <Text className="text-white text-xs">
                 Extra charges may apply
               </Text>

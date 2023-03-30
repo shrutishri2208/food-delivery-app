@@ -2,39 +2,62 @@ import { ACTIONS } from "./cartTypes";
 
 const initialState = {
   cartTotal: 0,
-  cartCount: [],
+  cartItems: [],
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.INCREASE_ITEM:
-      const inCart = state.cartCount.find((item) =>
-        item.id === action.payload ? true : false
+      const inCart = state.cartItems.find((item) =>
+        item.id === action.payload.id ? true : false
       );
       return {
-        cartCount: inCart
-          ? state.cartCount.map((item) =>
-              item.id === action.payload
+        cartTotal: state.cartTotal + action.payload.price,
+        cartItems: inCart
+          ? state.cartItems.map((item) =>
+              item.id === action.payload.id
                 ? { ...item, count: item.count + 1 }
                 : item
             )
-          : [...state.cartCount, { id: action.payload, count: 1 }],
+          : [
+              ...state.cartItems,
+              {
+                id: action.payload.id,
+                count: 1,
+                title: action.payload.title,
+                price: action.payload.price,
+              },
+            ],
       };
     case ACTIONS.DECREASE_ITEM:
+      const isZero = state.cartItems.find((item) =>
+        item.count === 0 ? true : false
+      );
+
       return {
-        cartCount: state.cartCount.map((item) =>
-          item.id === action.payload ? { ...item, count: item.count - 1 } : item
-        ),
+        cartTotal: state.cartTotal - action.payload.price,
+
+        cartItems:
+          action.payload.count === 1
+            ? state.cartItems.filter((item) => item.id !== action.payload.id)
+            : state.cartItems.map((item) =>
+                item.id === action.payload.id
+                  ? { ...item, count: item.count - 1 }
+                  : item
+              ),
       };
 
     case ACTIONS.DELETE_ITEM:
       return {
+        cartItems: state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        ),
         cartTotal: state.cartTotal - action.payload.price,
       };
     case ACTIONS.EMPTY_CART:
       return {
         cartTotal: 0,
-        cartCount: [],
+        cartItems: [],
       };
     default:
       return state;
@@ -48,15 +71,15 @@ export default cartReducer;
 // const initialState = {
 //   cartItems: [],
 //   cartTotal: 0,
-//   cartCount: {},
+//   cartItems: {},
 // };
 
 // const cartReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     case ACTIONS.ADD_ITEM:
 //       return {
-//         cartCount: {
-//           ...state.cartCount,
+//         cartItems: {
+//           ...state.cartItems,
 //           [action.payload.id]: 1,
 //         },
 
@@ -83,17 +106,17 @@ export default cartReducer;
 //     case ACTIONS.INCREASE_ITEM:
 //       return {
 //         ...state,
-//         cartCount: {
-//           ...state.cartCount,
-//           [action.payload]: state.cartCount[action.payload] + 1,
+//         cartItems: {
+//           ...state.cartItems,
+//           [action.payload]: state.cartItems[action.payload] + 1,
 //         },
 //       };
 //     case ACTIONS.DECREASE_ITEM:
 //       return {
 //         ...state,
-//         cartCount: {
-//           ...state.cartCount,
-//           [action.payload]: state.cartCount[action.payload] - 1,
+//         cartItems: {
+//           ...state.cartItems,
+//           [action.payload]: state.cartItems[action.payload] - 1,
 //         },
 //       };
 //     default:

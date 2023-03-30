@@ -27,11 +27,9 @@ import {
 
 const CartScreen = () => {
   const navigation = useNavigation();
-  // const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
-  const cartCount = useSelector((state) => state.cart.cartCount);
-  console.log("IN CART SCREEN", cartCount);
-  const extraCharges = 31 + 45;
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const extraCharges = 30 + 45;
   const finalCartTotal = cartTotal + extraCharges;
 
   useEffect(() => {
@@ -58,59 +56,40 @@ const CartScreen = () => {
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
         <View className="">
           <View className="bg-white mx-4 mt-4 rounded-xl">
-            {/* <View style={styles.line} className="pb-5">
+            <View style={styles.line} className="pb-5">
               {cartItems.map((item, index) => {
                 return (
                   <View
                     key={index}
-                    className="flex-row justify-between p-5 pb-0"
+                    className="flex-row justify-between items-center p-5 pb-0"
                   >
                     <View>
                       <Text className="text-lg font-semibold text-gray-500">
                         {item.title}
                       </Text>
                     </View>
-                    <View className="flex-row">
-                      <Button
-                        title="-"
-                        onPress={() => dispatch(decreaseItem(item.id))}
-                      />
-                      <Text>{cartCount[item.id]}</Text>
-                      <Button
-                        title="+"
-                        onPress={() => dispatch(increaseItem(item.id))}
-                      />
-                    </View>
-                    <Text className="font-black text-lg">₹{item.price}</Text>
-                  </View>
-                );
-              })}
-            </View> */}
-            <View style={styles.line} className="pb-5">
-              {cartCount.map((item, index) => {
-                return (
-                  <View
-                    key={index}
-                    className="flex-row justify-between p-5 pb-0"
-                  >
-                    <View>
-                      <Text className="text-lg font-semibold text-gray-500">
-                        {item.id}
-                      </Text>
-                    </View>
-                    <View className="flex-row">
-                      <Button
-                        title="-"
-                        onPress={() => dispatch(decreaseItem(item.id))}
-                      />
-                      <Text>{item.count}</Text>
-                      <Button
-                        title="+"
+
+                    <View className="flex-row gap-3 items-center  ">
+                      <Pressable
+                        className=" "
                         onPress={() => {
-                          dispatch(increaseItem(item.id));
-                          console.log("INCREASE");
+                          dispatch(decreaseItem(item));
+                          console.log("CART COUNT", item.count);
                         }}
-                      />
+                      >
+                        <AntDesign name="minus" size={16} color="green" />
+                      </Pressable>
+                      <Text className="text-lg font-bold text-green-700">
+                        {item.count}
+                      </Text>
+                      <Pressable
+                        className=""
+                        onPress={() => {
+                          dispatch(increaseItem(item));
+                        }}
+                      >
+                        <AntDesign name="plus" size={16} color="green" />
+                      </Pressable>
                     </View>
                     <Text className="font-black text-lg">₹{item.price}</Text>
                   </View>
@@ -163,9 +142,9 @@ const CartScreen = () => {
             </View>
             <View className="flex-row justify-between pb-2" style={styles.line}>
               <Text className="font-semibold text-gray-500 text-lg">
-                Delivery Fee | 1.4km
+                Delivery Fee
               </Text>
-              <Text className="font-black text-lg">₹31.00</Text>
+              <Text className="font-black text-lg">₹30.00</Text>
             </View>
             <View className="flex-row justify-between">
               <Text className="font-bold text-gray-500 text-lg">
@@ -175,7 +154,7 @@ const CartScreen = () => {
             </View>
             <View className="flex-row justify-between pb-2" style={styles.line}>
               <Text className="font-bold text-gray-500 text-lg">
-                Govt Taxes & Other Chrages
+                Govt Taxes & Other Charges
               </Text>
               <Text className="font-bold text-lg">₹45</Text>
             </View>
