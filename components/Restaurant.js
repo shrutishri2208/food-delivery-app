@@ -17,7 +17,7 @@ const Restaurant = ({
   distance,
   discountPercent,
   discount,
-  freeDelivery,
+  // freeDelivery,
   price,
   menu,
 }) => {
@@ -40,7 +40,7 @@ const Restaurant = ({
           distance,
           discountPercent,
           discount,
-          freeDelivery,
+          // freeDelivery,
           price,
           menu,
         });
@@ -83,14 +83,14 @@ const Restaurant = ({
             {address} • {distance} km
           </Text>
         </View>
-        {freeDelivery && (
+        {/* {freeDelivery && (
           <View className="flex-row items-center bg-gray-100 py-1 px-2 rounded-full">
             <MaterialIcons name="delivery-dining" size={24} color="#7300e6" />
             <Text style={styles.textColor} className="font-extrabold ml-1">
               FREE DELIVERY
             </Text>
           </View>
-        )}
+        )} */}
       </View>
     </TouchableOpacity>
   );

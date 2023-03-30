@@ -26,9 +26,16 @@ export const increaseItem = (id) => {
     payload: id,
   };
 };
+
 export const decreaseItem = (id) => {
   return {
     type: ACTIONS.DECREASE_ITEM,
     payload: id,
+  };
+};
+
+export const closeCart = () => {
+  return {
+    type: ACTIONS.CLOSE_CART,
   };
 };

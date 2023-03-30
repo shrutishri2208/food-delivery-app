@@ -25,7 +25,7 @@ const MenuItem = ({
       className="mt-8 flex-row justify-between pb-4 relative"
       style={styles.line}
     >
-      <View>
+      <View className="flex-1">
         <View className="flex-row items-center">
           {veg ? (
             <FontAwesome name="circle" size={10} color="green" />
@@ -55,29 +55,34 @@ const MenuItem = ({
           />
         </Pressable>
       </View>
-      <Pressable onPress={() => setIsModal(true)}>
+      <Pressable onPress={() => setIsModal(true)} className="flex-2 ">
         <Image
           source={{ uri: urlFor(image).url() }}
           style={{ height: 150, width: 150 }}
           className="rounded-2xl"
         />
-        <Pressable
-          className="items-center"
-          onPress={() => {
-            // dispatch(increaseItem(_key));
-            dispatch(
-              increaseItem({
-                id: _key,
-                title: title,
-                price: price,
-              })
-            );
-          }}
-        >
+        {cartItems.some((item) => item.id === _key) ? (
           <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">
-            ADD
+            ADDED
           </Text>
-        </Pressable>
+        ) : (
+          <Pressable
+            className="items-center"
+            onPress={() => {
+              dispatch(
+                increaseItem({
+                  id: _key,
+                  title: title,
+                  price: price,
+                })
+              );
+            }}
+          >
+            <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">
+              ADD
+            </Text>
+          </Pressable>
+        )}
       </Pressable>
       <Modal
         isVisible={isModal}
@@ -123,11 +128,28 @@ const MenuItem = ({
                   {ratings} ({noOfRatings})
                 </Text>
               </View>
-              <Pressable className="mt-4">
-                <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-2 px-10 shadow-md shadow-black rounded-lg">
-                  ADD
+              {cartItems.some((item) => item.id === _key) ? (
+                <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">
+                  ADDED
                 </Text>
-              </Pressable>
+              ) : (
+                <Pressable
+                  className="items-center"
+                  onPress={() => {
+                    dispatch(
+                      increaseItem({
+                        id: _key,
+                        title: title,
+                        price: price,
+                      })
+                    );
+                  }}
+                >
+                  <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">
+                    ADD
+                  </Text>
+                </Pressable>
+              )}
             </View>
             <Text className="bg-white text-gray-500 my-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

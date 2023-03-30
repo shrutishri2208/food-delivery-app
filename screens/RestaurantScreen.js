@@ -13,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons, FontAwesome, AntDesign } from "@expo/vector-icons";
 import MenuItem from "../components/MenuItem";
 import { useSelector, useDispatch } from "react-redux";
+import FooterMenu from "../components/FooterMenu";
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
@@ -32,7 +33,7 @@ const RestaurantScreen = () => {
       address,
       distance,
       price,
-      freeDelivery,
+      // freeDelivery,
       menu,
     },
   } = useRoute();
@@ -43,7 +44,7 @@ const RestaurantScreen = () => {
     });
   }, []);
   return (
-    <SafeAreaView className="relative">
+    <SafeAreaView className="relative bg-white">
       <TouchableOpacity
         className="p-4"
         onPress={() => {
@@ -53,7 +54,7 @@ const RestaurantScreen = () => {
         <AntDesign name="arrowleft" size={24} color="#555555" />
       </TouchableOpacity>
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
-        <View className="bg-gray-200 m-4 mt-0 p-4 rounded-3xl relative ">
+        <View className="bg-gray-100 m-4 mt-0 p-4 rounded-3xl relative ">
           <Text className="text-2xl font-bold">{title}</Text>
           <View className="flex-row items-center space-x-1 mt-1 ">
             <MaterialIcons name="stars" size={20} color="green" />
@@ -82,18 +83,18 @@ const RestaurantScreen = () => {
           <View className="mt-4 flex-row items-center">
             <AntDesign name="infocirlce" size={16} color="orange" />
             <Text className="ml-2">{distance} km</Text>
-            {freeDelivery ? (
+            {/* {freeDelivery ? (
               <Text> | Free delivery for your area</Text>
             ) : (
               <Text> | ₹36</Text>
-            )}
+            )} */}
           </View>
         </View>
 
         <View className="mt-4">
           <Text className="text-center tracking-widest text-md">MENU</Text>
 
-          <View className="bg-gray-200 m-4 rounded-xl py-3 px-4 text-center  flex-row justify-between items-center">
+          <View className="bg-gray-100 m-4 rounded-xl py-3 px-4 text-center  flex-row justify-between items-center">
             <TextInput placeholder="Search for dishes" className="text-lg" />
             <FontAwesome
               name="search"
@@ -113,29 +114,6 @@ const RestaurantScreen = () => {
           </View>
         </View>
       </ScrollView>
-      {/* {cartItems.length !== 0 && (
-        <View className="absolute bottom-20 left-0 right-0 mx-2">
-          <View className="bg-green-700 flex-row justify-between p-4 rounded-2xl">
-            <View>
-              <Text className="text-white">
-                {cartItems.length} items | {cartTotal}
-              </Text>
-              <Text className="text-white text-xs">
-                Extra charges may apply
-              </Text>
-            </View>
-            <View className="justify-center">
-              <Pressable
-                onPress={() => {
-                  navigation.navigate("Cart");
-                }}
-              >
-                <Text className="text-white text-lg font-bold">View Cart</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      )} */}
       {cartItems.length !== 0 && (
         <View className="absolute bottom-20 left-0 right-0 mx-2">
           <View className="bg-green-700 flex-row justify-between p-4 rounded-2xl">

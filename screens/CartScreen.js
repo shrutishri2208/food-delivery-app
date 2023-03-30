@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
+  FlatList,
 } from "react-native";
 import {
   MaterialIcons,
@@ -52,128 +53,163 @@ const CartScreen = () => {
       >
         <AntDesign name="arrowleft" size={24} color="#555555" />
       </TouchableOpacity>
+      {cartItems.length === 0 ? (
+        <View className="flex my-auto items-center">
+          <Pressable
+            className="bg-green-700 py-4 px-12 rounded-xl"
+            onPress={() => navigation.goBack()}
+          >
+            <Text className="text-white text-lg font-bold">
+              Add items to cart
+            </Text>
+          </Pressable>
+        </View>
+      ) : (
+        <View>
+          <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
+            <View className="">
+              <View className="bg-white mx-4 mt-4 rounded-xl">
+                <View style={styles.line} className="pb-5">
+                  {cartItems.map((item, index) => {
+                    return (
+                      <View key={index} className="flex-1 flex-row p-4 pb-0">
+                        <View className=" flex-1">
+                          <Text className="text-lg font-semibold text-gray-500 my-auto">
+                            {item.title}
+                          </Text>
+                        </View>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
-        <View className="">
-          <View className="bg-white mx-4 mt-4 rounded-xl">
-            <View style={styles.line} className="pb-5">
-              {cartItems.map((item, index) => {
-                return (
-                  <View
-                    key={index}
-                    className="flex-row justify-between items-center p-5 pb-0"
-                  >
+                        <View className="flex-row items-center px-2 py-1  mr-4">
+                          <Pressable
+                            className=" "
+                            onPress={() => {
+                              dispatch(decreaseItem(item));
+                            }}
+                          >
+                            <AntDesign name="minus" size={16} color="green" />
+                          </Pressable>
+                          <Text className="mx-4 text-lg font-bold text-green-700">
+                            {item.count}
+                          </Text>
+                          <Pressable
+                            className=""
+                            onPress={() => {
+                              dispatch(increaseItem(item));
+                            }}
+                          >
+                            <AntDesign name="plus" size={16} color="green" />
+                          </Pressable>
+                        </View>
+                        <View className=" px-2">
+                          <Text className="font-black text-lg text-center my-auto ">
+                            ₹{item.price}
+                          </Text>
+                        </View>
+                      </View>
+                    );
+                  })}
+                </View>
+                <Pressable
+                  onPress={() => navigation.goBack()}
+                  className="flex-row items-center p-5"
+                  style={styles.line}
+                >
+                  <AntDesign name="plus" size={12} color="black" />
+                  <Text className="text-lg">{"   "}Add more items</Text>
+                </Pressable>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(emptyCart());
+                    navigation.goBack();
+                  }}
+                  className="border-2 mx-32 p-2 my-4 border-green-700 rounded-lg"
+                >
+                  <Text className="text-center text-green-700 font-bold">
+                    EMPTY CART
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <Text className="text-lg font-bold m-4">Offers & Benefits</Text>
+
+              <View className=" bg-white mx-4 rounded-xl">
+                <View
+                  className="p-5 flex-row justify-between "
+                  style={styles.line}
+                >
+                  <View className="flex-row items-center gap-1">
+                    <MaterialCommunityIcons
+                      name="brightness-percent"
+                      size={24}
+                      color="#FF5C00"
+                    />
                     <View>
-                      <Text className="text-lg font-semibold text-gray-500">
-                        {item.title}
-                      </Text>
+                      <Text className="text-lg font-bold">TRYNEW</Text>
+                      <Text>Save another ₹79 on this order </Text>
                     </View>
-
-                    <View className="flex-row gap-3 items-center  ">
-                      <Pressable
-                        className=" "
-                        onPress={() => {
-                          dispatch(decreaseItem(item));
-                          console.log("CART COUNT", item.count);
-                        }}
-                      >
-                        <AntDesign name="minus" size={16} color="green" />
-                      </Pressable>
-                      <Text className="text-lg font-bold text-green-700">
-                        {item.count}
-                      </Text>
-                      <Pressable
-                        className=""
-                        onPress={() => {
-                          dispatch(increaseItem(item));
-                        }}
-                      >
-                        <AntDesign name="plus" size={16} color="green" />
-                      </Pressable>
-                    </View>
-                    <Text className="font-black text-lg">₹{item.price}</Text>
                   </View>
-                );
-              })}
-            </View>
-            <Button title="DELETE ALL" onPress={() => dispatch(emptyCart())} />
-            <Pressable
-              onPress={() => navigation.goBack()}
-              className="flex-row items-center p-5"
-              style={styles.line}
-            >
-              <AntDesign name="plus" size={12} color="black" />
-              <Text className="text-lg">{"   "}Add more items</Text>
-            </Pressable>
-            <View className="flex-row items-center p-5 justify-between">
-              <Text className="text-lg">Add cooking requests</Text>
-              <AntDesign name="pluscircleo" size={18} color="#555555" />
-            </View>
-          </View>
+                  <Text className="text-orange-600 font-bold">Apply</Text>
+                </View>
+                <Text className="p-3 text-center">View more coupons</Text>
+              </View>
 
-          <Text className="text-lg font-bold m-4">Offers & Benefits</Text>
+              <Text className="text-lg font-bold m-4">Bill Details</Text>
 
-          <View className=" bg-white mx-4 rounded-xl">
-            <View className="p-5 flex-row justify-between " style={styles.line}>
-              <View className="flex-row items-center gap-1">
-                <MaterialCommunityIcons
-                  name="brightness-percent"
-                  size={24}
-                  color="#FF5C00"
-                />
-                <View>
-                  <Text className="text-lg font-bold">TRYNEW</Text>
-                  <Text>Save another ₹79 on this order </Text>
+              <View className="bg-white mx-4 p-5 pt-3 rounded-xl gap-y-2">
+                <View className="flex-row justify-between">
+                  <Text className="font-semibold text-gray-500 text-lg">
+                    Item Total
+                  </Text>
+                  <Text className="font-black text-lg">₹{cartTotal}</Text>
+                </View>
+                <View
+                  className="flex-row justify-between pb-2"
+                  style={styles.line}
+                >
+                  <Text className="font-semibold text-gray-500 text-lg">
+                    Delivery Fee
+                  </Text>
+                  <Text className="font-black text-lg">₹30.00</Text>
+                </View>
+                <View className="flex-row justify-between">
+                  <Text className="font-bold text-gray-500 text-lg">
+                    Delivery Tip
+                  </Text>
+                  <Text className="font-bold text-orange-600 text-lg">
+                    Add Tip
+                  </Text>
+                </View>
+                <View
+                  className="flex-row justify-between pb-2"
+                  style={styles.line}
+                >
+                  <Text className="font-bold text-gray-500 text-lg">
+                    Govt Taxes & Other Charges
+                  </Text>
+                  <Text className="font-bold text-lg">₹45</Text>
+                </View>
+                <View className="flex-row justify-between pt-2">
+                  <Text className="font-bold text-lg">To Pay</Text>
+                  <Text className="font-bold text-lg">₹{finalCartTotal}</Text>
                 </View>
               </View>
-              <Text className="text-orange-600 font-bold">Apply</Text>
             </View>
-            <Text className="p-3 text-center">View more coupons</Text>
-          </View>
-
-          <Text className="text-lg font-bold m-4">Bill Details</Text>
-
-          <View className="bg-white mx-4 p-5 pt-3 rounded-xl gap-y-2">
-            <View className="flex-row justify-between">
-              <Text className="font-semibold text-gray-500 text-lg">
-                Item Total
+          </ScrollView>
+          <View className="bg-white absolute bottom-0 left-0 right-0 p-4 rounded-t-xl flex-row justify-between items-center">
+            <View>
+              <Text className="text-2xl font-bold">₹{finalCartTotal}</Text>
+              <Text className="text-green-700 font-bold">
+                View Detailed Bill
               </Text>
-              <Text className="font-black text-lg">₹{cartTotal}</Text>
             </View>
-            <View className="flex-row justify-between pb-2" style={styles.line}>
-              <Text className="font-semibold text-gray-500 text-lg">
-                Delivery Fee
+            <Pressable className="bg-green-700 py-4 px-12 rounded-xl">
+              <Text className="text-white text-lg font-bold">
+                Proceed to Pay
               </Text>
-              <Text className="font-black text-lg">₹30.00</Text>
-            </View>
-            <View className="flex-row justify-between">
-              <Text className="font-bold text-gray-500 text-lg">
-                Delivery Tip
-              </Text>
-              <Text className="font-bold text-orange-600 text-lg">Add Tip</Text>
-            </View>
-            <View className="flex-row justify-between pb-2" style={styles.line}>
-              <Text className="font-bold text-gray-500 text-lg">
-                Govt Taxes & Other Charges
-              </Text>
-              <Text className="font-bold text-lg">₹45</Text>
-            </View>
-            <View className="flex-row justify-between pt-2">
-              <Text className="font-bold text-lg">To Pay</Text>
-              <Text className="font-bold text-lg">₹{finalCartTotal}</Text>
-            </View>
+            </Pressable>
           </View>
         </View>
-      </ScrollView>
-      <View className="bg-white absolute bottom-0 left-0 right-0 p-4 rounded-t-xl flex-row justify-between items-center">
-        <View>
-          <Text className="text-2xl font-bold">₹{finalCartTotal}</Text>
-          <Text className="text-green-700 font-bold">View Detailed Bill</Text>
-        </View>
-        <Pressable className="bg-green-700 py-4 px-12 rounded-xl">
-          <Text className="text-white text-lg font-bold">Proceed to Pay</Text>
-        </Pressable>
-      </View>
+      )}
     </SafeAreaView>
   );
 };

@@ -1,6 +1,6 @@
 import {
   View,
-  Image,
+  Pressable,
   Text,
   TextInput,
   StyleSheet,
@@ -36,7 +36,7 @@ const HomeScreen = () => {
     <SafeAreaView>
       <View className={" h-full p-4"} style={styles.background}>
         {/* HEADER */}
-        <View className="header flex flex-row items-center justify-between pb-4 relative">
+        <View className=" header flex flex-row items-center justify-between pb-4 relative">
           <View className="flex flex-row items-center">
             <View>
               <Ionicons name="location-sharp" size={30} color="#FF5C00" />
@@ -51,9 +51,12 @@ const HomeScreen = () => {
               </Text>
             </View>
           </View>
-          <View className="mr-2 absolute top-1 right-0">
-            <FontAwesome name="user-circle" size={24} color="#FF5C00" />
-          </View>
+          <Pressable
+            className="mr-2 absolute top-1 right-0 p-1 "
+            onPress={() => navigation.navigate("Cart")}
+          >
+            <Ionicons name="cart" size={26} color="#FF5C00" className="" />
+          </Pressable>
         </View>
 
         {/* SEARCHBOX*/}
@@ -85,9 +88,9 @@ const HomeScreen = () => {
           {/* <ItemsList heading={"30 mins or less!"} /> */}
           <RestaurantList />
         </ScrollView>
-        <View className="h-12" style={styles.background}>
+        {/* <View className="h-12" style={styles.background}>
           <FooterMenu />
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );

@@ -30,10 +30,6 @@ const cartReducer = (state = initialState, action) => {
             ],
       };
     case ACTIONS.DECREASE_ITEM:
-      const isZero = state.cartItems.find((item) =>
-        item.count === 0 ? true : false
-      );
-
       return {
         cartTotal: state.cartTotal - action.payload.price,
 
