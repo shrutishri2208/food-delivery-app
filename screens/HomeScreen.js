@@ -34,7 +34,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView>
-      <View className={" h-full p-4"} style={styles.background}>
+      <View className=" h-full p-4 bg-gray-100">
         {/* HEADER */}
         <View className=" header flex flex-row items-center justify-between pb-4 relative">
           <View className="flex flex-row items-center">

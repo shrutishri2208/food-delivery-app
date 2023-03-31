@@ -129,7 +129,7 @@ const MenuItem = ({
                 </Text>
               </View>
               {cartItems.some((item) => item.id === _key) ? (
-                <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">
+                <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg h-10">
                   ADDED
                 </Text>
               ) : (
@@ -145,7 +145,7 @@ const MenuItem = ({
                     );
                   }}
                 >
-                  <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg bottom-5">
+                  <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg h-10">
                     ADD
                   </Text>
                 </Pressable>

@@ -6,8 +6,9 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  Switch,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons, FontAwesome, AntDesign } from "@expo/vector-icons";
@@ -20,6 +21,7 @@ const RestaurantScreen = () => {
   // const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const [searchItem, setSearchItem] = useState("");
 
   const {
     params: {
@@ -38,13 +40,32 @@ const RestaurantScreen = () => {
     },
   } = useRoute();
 
+  const [menuToDisplay, setMenuToDisplay] = useState(menu);
+  const [isVeg, setIsVeg] = useState(false);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  const onSubmit = () => {
+    const filterMenu = menu.filter((item) =>
+      item.title.toLowerCase().includes(searchItem.toLowerCase())
+    );
+    setMenuToDisplay(filterMenu);
+  };
+
+  onToggle = () => {
+    setIsVeg(!isVeg);
+    console.log("IS VEG", isVeg);
+    const onlyVegMenu = menu.filter((item) => item.veg === true);
+
+    setMenuToDisplay(!isVeg ? onlyVegMenu : menu);
+  };
+
   return (
-    <SafeAreaView className="relative bg-white">
+    <SafeAreaView className="h-full">
       <TouchableOpacity
         className="p-4"
         onPress={() => {
@@ -54,7 +75,7 @@ const RestaurantScreen = () => {
         <AntDesign name="arrowleft" size={24} color="#555555" />
       </TouchableOpacity>
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
-        <View className="bg-gray-100 m-4 mt-0 p-4 rounded-3xl relative ">
+        <View className="bg-gray-200 m-4 mt-0 p-4 rounded-3xl relative ">
           <Text className="text-2xl font-bold">{title}</Text>
           <View className="flex-row items-center space-x-1 mt-1 ">
             <MaterialIcons name="stars" size={20} color="green" />
@@ -92,30 +113,54 @@ const RestaurantScreen = () => {
         </View>
 
         <View className="mt-4">
-          <Text className="text-center tracking-widest text-md">MENU</Text>
+          <View className="flex-row  justify-between mx-4">
+            <Text className="mx-4 tracking-widest text-lg font-bold my-auto">
+              MENU
+            </Text>
+            <View>
+              <Switch
+                trackColor={{ false: "#767577", true: "green" }}
+                thumbColor={"#f4f3f4"}
+                value={isVeg}
+                onValueChange={() => onToggle()}
+                className="mr-1"
+              />
+              <Text className="text-green-700 text-center -mt-2 font-bold">
+                ONLY VEG
+              </Text>
+            </View>
+          </View>
 
-          <View className="bg-gray-100 m-4 rounded-xl py-3 px-4 text-center  flex-row justify-between items-center">
-            <TextInput placeholder="Search for dishes" className="text-lg" />
-            <FontAwesome
-              name="search"
-              size={20}
-              color="#FF5C00"
-              opacity={0.5}
+          <View className="bg-gray-200 m-4 rounded-xl py-3 px-4 text-center  flex-row justify-between items-center">
+            <TextInput
+              placeholder="Search for dishes"
+              className="text-lg"
+              value={searchItem}
+              onChangeText={setSearchItem}
+              onSubmitEditing={() => onSubmit()}
             />
+            <Pressable onPress={() => onSubmit()}>
+              <FontAwesome
+                name="search"
+                size={20}
+                color="#FF5C00"
+                opacity={0.5}
+              />
+            </Pressable>
           </View>
 
           <View className="mx-4 mt-4">
             <Text className="text-2xl font-bold">
               Recommended ({menu.length})
             </Text>
-            {menu.map((item, index) => {
+            {menuToDisplay.map((item, index) => {
               return <MenuItem key={index} {...item} />;
             })}
           </View>
         </View>
       </ScrollView>
       {cartItems.length !== 0 && (
-        <View className="absolute bottom-20 left-0 right-0 mx-2">
+        <View className="bottom-2 absolute left-0 right-0 mx-2">
           <View className="bg-green-700 flex-row justify-between p-4 rounded-2xl">
             <View>
               <Text className="text-white font-bold text-lg">

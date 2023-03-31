@@ -79,20 +79,20 @@ const CartScreen = () => {
                           </Text>
                         </View>
 
-                        <View className="flex-row items-center px-2 py-1  mr-4">
+                        <View className="flex-row items-center px-2 py-1 ">
                           <Pressable
-                            className=" "
+                            className="p-2"
                             onPress={() => {
                               dispatch(decreaseItem(item));
                             }}
                           >
                             <AntDesign name="minus" size={16} color="green" />
                           </Pressable>
-                          <Text className="mx-4 text-lg font-bold text-green-700">
+                          <Text className="mx-2 text-lg font-bold text-green-700">
                             {item.count}
                           </Text>
                           <Pressable
-                            className=""
+                            className="p-2"
                             onPress={() => {
                               dispatch(increaseItem(item));
                             }}
