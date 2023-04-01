@@ -6,31 +6,37 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
-import Options from "../components/Options";
 import { ScrollView } from "react-native";
-import { featured } from "../data";
-import Featured from "../components/Featured";
 import ItemsList from "../components/ItemsList";
-import FooterMenu from "../components/FooterMenu";
 import Categories from "../components/Categories";
 import RestaurantList from "../components/RestaurantList";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const restaurants = useSelector((state) => state.restaurants);
-  const loading = useSelector((state) => state.loading);
-  const dispatch = useDispatch();
+  const restaurants = useSelector((state) => state.restaurants.restaurants);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchRestaurants, setSearchRestaurants] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  const onSubmit = () => {
+    const searchRestaurants = restaurants.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchRestaurants(searchRestaurants);
+  };
 
   return (
     <SafeAreaView>
@@ -39,7 +45,7 @@ const HomeScreen = () => {
         <View className=" header flex flex-row items-center justify-between pb-4 relative">
           <View className="flex flex-row items-center">
             <View>
-              <Ionicons name="location-sharp" size={30} color="#FF5C00" />
+              <Ionicons name="location-sharp" size={30} color="#b30000" />
             </View>
             <View className="ml-2">
               <Text className="text-xl font-bold text-black">
@@ -55,7 +61,7 @@ const HomeScreen = () => {
             className="mr-2 absolute top-1 right-0 p-1 "
             onPress={() => navigation.navigate("Cart")}
           >
-            <Ionicons name="cart" size={26} color="#FF5C00" className="" />
+            <Ionicons name="cart" size={26} color="#b30000" className="" />
           </Pressable>
         </View>
 
@@ -66,13 +72,24 @@ const HomeScreen = () => {
               placeholder="Search for dishes & restaurant"
               keyboardType="default"
               className=" flex-1"
+              value={searchTerm}
+              onChangeText={setSearchTerm}
+              onSubmitEditing={() => onSubmit()}
             />
-            <FontAwesome
-              name="search"
-              size={20}
-              color="#FF5C00"
-              opacity={0.5}
-            />
+            {searchTerm === "" ? (
+              <Pressable onPress={() => onSubmit()}>
+                <FontAwesome name="search" size={20} color="#b30000" />
+              </Pressable>
+            ) : (
+              <Pressable
+                onPress={() => {
+                  setSearchTerm("");
+                  setSearchRestaurants(restaurants);
+                }}
+              >
+                <AntDesign name="close" size={24} color="#b30000" />
+              </Pressable>
+            )}
           </View>
         </View>
 
@@ -86,7 +103,10 @@ const HomeScreen = () => {
           <Categories />
           <ItemsList heading={"Top rated near you"} />
           {/* <ItemsList heading={"30 mins or less!"} /> */}
-          <RestaurantList />
+          <RestaurantList
+            searchTerm={searchTerm}
+            searchRestaurants={searchRestaurants}
+          />
         </ScrollView>
         {/* <View className="h-12" style={styles.background}>
           <FooterMenu />
@@ -96,9 +116,4 @@ const HomeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  background: {
-    backgroundColor: "white",
-  },
-});
 export default HomeScreen;

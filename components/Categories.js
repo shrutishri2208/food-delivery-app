@@ -1,18 +1,18 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard";
 import { useSelector, useDispatch } from "react-redux";
 import client from "../sanity";
-
-const PROJECT_ID = "rec7oikj";
-const DATASET = "production";
-const QUERY = encodeURIComponent(`*[_type == "categories"]`);
-
-const URL = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${QUERY}`;
+import { setCategory } from "../redux/category/categoryActions";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
+
+  const categories1 = categories.slice(0, 5);
+  const categories2 = categories.slice(5, 10);
 
   const fetchData = async () => {
     client
@@ -34,17 +34,29 @@ const Categories = () => {
         <Text>Loading...</Text>
       ) : (
         <View>
-          <Text className="text-black text-xl font-bold ">
-            What's on your mind?
-          </Text>
+          <View className="flex-row items-center justify-between">
+            <Text className="text-black text-xl font-bold ">
+              What's on your mind?
+            </Text>
+            <Pressable onPress={() => dispatch(setCategory("all"))}>
+              <Text className="font-bold">View All</Text>
+            </Pressable>
+          </View>
           <ScrollView
             horizontal
             contentContainerStyle={{ paddingVertical: 12 }}
           >
-            <View className="flex-row">
-              {categories.map((item) => {
-                return <CategoryCard {...item} key={item._id} />;
-              })}
+            <View className="">
+              <View className="flex-row">
+                {categories1.map((item) => {
+                  return <CategoryCard {...item} key={item._id} />;
+                })}
+              </View>
+              <View className="flex-row">
+                {categories2.map((item) => {
+                  return <CategoryCard {...item} key={item._id} />;
+                })}
+              </View>
             </View>
           </ScrollView>
         </View>

@@ -33,7 +33,7 @@ const MenuItem = ({
             <FontAwesome name="circle" size={10} color="red" />
           )}
           {bestseller && (
-            <Text className="ml-2 text-orange-600">Bestseller</Text>
+            <Text className="ml-2 text-red-800 font-bold">Bestseller</Text>
           )}
         </View>
         <Text className="text-xl font-bold">{title}</Text>

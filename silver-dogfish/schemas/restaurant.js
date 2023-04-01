@@ -110,7 +110,7 @@ export default {
             {
               name: 'veg',
               type: 'boolean',
-              title: 'Veg/Non-Veg',
+              title: 'Veg',
             },
             {
               name: 'bestseller',

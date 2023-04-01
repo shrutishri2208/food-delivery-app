@@ -9,7 +9,7 @@ const FooterItems = ({ imgURL, title, active }) => {
         <FontAwesome
           name="user-circle"
           size={32}
-          color={"#FF5C00"}
+          color={"#b30000"}
           className="m-auto"
         />
       ) : (

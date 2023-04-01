@@ -2,18 +2,12 @@ import {
   View,
   Text,
   Pressable,
-  Button,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
   StatusBar,
-  FlatList,
 } from "react-native";
-import {
-  MaterialIcons,
-  MaterialCommunityIcons,
-  AntDesign,
-} from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 import React, { useEffect, useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -44,7 +38,7 @@ const CartScreen = () => {
     });
   }, []);
   return (
-    <SafeAreaView className="bg-gray-100 h-full">
+    <SafeAreaView className="bg-gray-100">
       <TouchableOpacity
         className="p-4 bg-white"
         onPress={() => {
@@ -54,7 +48,7 @@ const CartScreen = () => {
         <AntDesign name="arrowleft" size={24} color="#555555" />
       </TouchableOpacity>
       {cartItems.length === 0 ? (
-        <View className="flex my-auto items-center">
+        <View className="flex h-full justify-center bottom-20 items-center">
           <Pressable
             className="bg-green-700 py-4 px-12 rounded-xl"
             onPress={() => navigation.goBack()}
@@ -66,7 +60,10 @@ const CartScreen = () => {
         </View>
       ) : (
         <View>
-          <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
+          <ScrollView
+            contentContainerStyle={{ paddingBottom: 220 }}
+            className="h-full"
+          >
             <View className="">
               <View className="bg-white mx-4 mt-4 rounded-xl">
                 <View style={styles.line} className="pb-5">
@@ -141,14 +138,14 @@ const CartScreen = () => {
                     <MaterialCommunityIcons
                       name="brightness-percent"
                       size={24}
-                      color="#FF5C00"
+                      color="#b30000"
                     />
                     <View>
                       <Text className="text-lg font-bold">TRYNEW</Text>
                       <Text>Save another ₹79 on this order </Text>
                     </View>
                   </View>
-                  <Text className="text-orange-600 font-bold">Apply</Text>
+                  <Text className="text-red-800 font-bold">Apply</Text>
                 </View>
                 <Text className="p-3 text-center">View more coupons</Text>
               </View>
@@ -175,7 +172,7 @@ const CartScreen = () => {
                   <Text className="font-bold text-gray-500 text-lg">
                     Delivery Tip
                   </Text>
-                  <Text className="font-bold text-orange-600 text-lg">
+                  <Text className="font-bold text-red-800 text-lg">
                     Add Tip
                   </Text>
                 </View>
@@ -195,7 +192,7 @@ const CartScreen = () => {
               </View>
             </View>
           </ScrollView>
-          <View className="bg-white absolute bottom-0 left-0 right-0 p-4 rounded-t-xl flex-row justify-between items-center">
+          <View className="bg-white absolute bottom-28 left-0 right-0 p-4 rounded-t-xl flex-row justify-between items-center">
             <View>
               <Text className="text-2xl font-bold">₹{finalCartTotal}</Text>
               <Text className="text-green-700 font-bold">

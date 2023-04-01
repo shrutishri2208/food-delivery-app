@@ -58,10 +58,14 @@ const RestaurantScreen = () => {
 
   onToggle = () => {
     setIsVeg(!isVeg);
-    console.log("IS VEG", isVeg);
-    const onlyVegMenu = menu.filter((item) => item.veg === true);
 
-    setMenuToDisplay(!isVeg ? onlyVegMenu : menu);
+    setMenuToDisplay(
+      !isVeg
+        ? menuToDisplay.filter((item) => item.veg === true)
+        : menu.filter((item) =>
+            item.title.toLowerCase().includes(searchItem.toLowerCase())
+          )
+    );
   };
 
   return (
@@ -88,21 +92,24 @@ const RestaurantScreen = () => {
           </View>
           <View className="absolute top-5 right-5 ">
             {liked ? (
-              <FontAwesome name="heart" size={20} color="#666666" />
+              <FontAwesome name="heart" size={20} color="maroon" />
             ) : (
-              <FontAwesome name="heart-o" size={20} color="#666666" />
+              <FontAwesome name="heart-o" size={20} color="maroon" />
             )}
           </View>
-          <View className="flex-row mt-2 mb-2">
+          <View className="flex-row mt-2">
             <Text className="font-bold mr-6">Outlet</Text>
             <Text className="">{address}</Text>
+          </View>
+          <View className="justify-center">
+            <Text className="items-center  text-xl font-extrabold pl-4">|</Text>
           </View>
           <View className="flex-row pb-2" style={styles.line}>
             <Text className="font-bold mr-3">{time} mins</Text>
             <Text>Delivery to Mathikere</Text>
           </View>
           <View className="mt-4 flex-row items-center">
-            <AntDesign name="infocirlce" size={16} color="orange" />
+            <AntDesign name="infocirlce" size={16} color="maroon" />
             <Text className="ml-2">{distance} km</Text>
             {/* {freeDelivery ? (
               <Text> | Free delivery for your area</Text>
@@ -139,19 +146,25 @@ const RestaurantScreen = () => {
               onChangeText={setSearchItem}
               onSubmitEditing={() => onSubmit()}
             />
-            <Pressable onPress={() => onSubmit()}>
-              <FontAwesome
-                name="search"
-                size={20}
-                color="#FF5C00"
-                opacity={0.5}
-              />
-            </Pressable>
+            {searchItem === "" ? (
+              <Pressable onPress={() => onSubmit()}>
+                <FontAwesome name="search" size={20} color="#b30000" />
+              </Pressable>
+            ) : (
+              <Pressable
+                onPress={() => {
+                  setSearchItem("");
+                  setMenuToDisplay(menu);
+                }}
+              >
+                <AntDesign name="close" size={20} color="#b30000" />
+              </Pressable>
+            )}
           </View>
 
           <View className="mx-4 mt-4">
             <Text className="text-2xl font-bold">
-              Recommended ({menu.length})
+              Recommended ({menuToDisplay.length})
             </Text>
             {menuToDisplay.map((item, index) => {
               return <MenuItem key={index} {...item} />;

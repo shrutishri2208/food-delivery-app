@@ -63,7 +63,7 @@ const Restaurant = ({
           <Text className="text-white font-extrabold text-2xl">
             {discountPercent}% OFF
           </Text>
-          <Text className="text-gray-50">UPTO ₹{discount}</Text>
+          <Text className="text-gray-50 font-bold">UPTO ₹{discount}</Text>
         </View>
       </View>
 
@@ -75,7 +75,7 @@ const Restaurant = ({
           <View className="flex-row items-center space-x-1">
             <MaterialIcons name="stars" size={20} color="green" />
             <Text className="text-black font-bold text-lg">
-              {ratings} ({noOfRatings}+) • {time} mins
+              {ratings} ({noOfRatings}K+) • {time} mins
             </Text>
           </View>
           <Text className="text-gray-500 text-lg">{category}</Text>

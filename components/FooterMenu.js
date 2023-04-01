@@ -7,7 +7,6 @@ import { useRoute } from "@react-navigation/native";
 
 const FooterMenu = () => {
   const route = useRoute();
-  console.log(route.name);
 
   return (
     <View className="flex-row flex-1 items-center pt-4 ">
@@ -15,10 +14,10 @@ const FooterMenu = () => {
         return <FooterItems key={item.id} {...item} />;
       })} */}
       <Pressable className="flex-1 items-center">
-        <Ionicons name="fast-food" size={30} color="#FF5C00" />
+        <Ionicons name="fast-food" size={30} color="#b30000" />
       </Pressable>
       <Pressable className="flex-1 items-center">
-        <Ionicons name="cart" size={30} color="#FF5C00" />
+        <Ionicons name="cart" size={30} color="#b30000" />
       </Pressable>
     </View>
   );
