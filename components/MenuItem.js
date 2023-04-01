@@ -38,9 +38,12 @@ const MenuItem = ({
         </View>
         <Text className="text-xl font-bold">{title}</Text>
         <Text className="text-xl text-gray-500">₹{price}</Text>
-        <Text className="text-gray-500 my-2">
-          {ratings} ({noOfRatings})
-        </Text>
+        <View className="flex-row items-center">
+          <MaterialIcons name="stars" size={20} color="#FFC000" />
+          <Text className="text-gray-500 my-2">
+            {ratings} ({noOfRatings})
+          </Text>
+        </View>
         <Pressable
           className="border-gray-500 border-2 w-28 px-2 py-1 rounded-full flex-row items-center justify-center  mt-4"
           onPress={() => setIsModal(true)}
@@ -124,9 +127,12 @@ const MenuItem = ({
 
                 <Text className="text-xl font-bold">{title}</Text>
                 <Text className="text-xl text-gray-500 mt-2">₹{price}</Text>
-                <Text className="text-gray-500 mt-2">
-                  {ratings} ({noOfRatings})
-                </Text>
+                <View className="flex-row items-center -mb-3">
+                  <MaterialIcons name="stars" size={20} color="#FFC000" />
+                  <Text className="text-gray-500 my-2">
+                    {ratings} ({noOfRatings})
+                  </Text>
+                </View>
               </View>
               {cartItems.some((item) => item.id === _key) ? (
                 <Text className="bg-white text-green-700 font-extrabold text-2xl text-center p-1 px-8 shadow-md shadow-black rounded-lg h-10">

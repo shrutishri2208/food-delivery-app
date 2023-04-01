@@ -4,22 +4,16 @@ import React, { useEffect, useState } from "react";
 import Restaurant from "./Restaurant";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRestaurants } from "../redux/restaurants/restaurantActions";
-import { setCategory } from "../redux/category/categoryActions";
-import { SearchBar } from "react-native-screens";
 
-const RestaurantList = ({ searchTerm, searchRestaurants }) => {
+const RestaurantList = ({ searchTerm = king, searchRestaurants }) => {
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.restaurants.loading);
 
-  // const restaurants = useSelector((state) => state.restaurants.restaurants);
+  let getRestaurants = useSelector((state) => state.restaurants.restaurants);
 
-  console.log("SEARCH RESTAURANTS", searchRestaurants.length);
-  console.log(searchRestaurants);
   const restaurants =
-    searchRestaurants.length !== 0
-      ? searchRestaurants
-      : useSelector((state) => state.restaurants.restaurants);
+    searchRestaurants.length !== 0 ? searchRestaurants : getRestaurants;
 
   const category = useSelector((state) => state.category.category);
 

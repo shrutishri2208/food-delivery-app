@@ -60,7 +60,7 @@ const Items = ({
       </View>
       <Text className="text-black text-lg p-1 font-bold">{title}</Text>
       <View className="flex-row items-center space-x-1">
-        <MaterialIcons name="stars" size={20} color="green" />
+        <MaterialIcons name="stars" size={20} color="#ffcc00" />
         <Text className="text-black">
           {ratings} • {time} mins
         </Text>

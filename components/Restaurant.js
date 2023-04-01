@@ -73,7 +73,7 @@ const Restaurant = ({
         <View>
           <Text className="text-black text-xl font-bold">{title}</Text>
           <View className="flex-row items-center space-x-1">
-            <MaterialIcons name="stars" size={20} color="green" />
+            <MaterialIcons name="stars" size={20} color="#FFC000" />
             <Text className="text-black font-bold text-lg">
               {ratings} ({noOfRatings}K+) • {time} mins
             </Text>

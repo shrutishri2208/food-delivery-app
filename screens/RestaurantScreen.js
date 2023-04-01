@@ -82,7 +82,7 @@ const RestaurantScreen = () => {
         <View className="bg-gray-200 m-4 mt-0 p-4 rounded-3xl relative ">
           <Text className="text-2xl font-bold">{title}</Text>
           <View className="flex-row items-center space-x-1 mt-1 ">
-            <MaterialIcons name="stars" size={20} color="green" />
+            <MaterialIcons name="stars" size={20} color="#FFC000" />
             <Text className="text-black font-bold">
               {ratings} ({noOfRatings} + ratings) • ₹{price} for two
             </Text>

@@ -3,10 +3,10 @@ import {
   Pressable,
   Text,
   TextInput,
-  StyleSheet,
+  StatusBar,
   TouchableOpacity,
 } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -27,6 +27,9 @@ const HomeScreen = () => {
     navigation.setOptions({
       headerShown: false,
     });
+  }, []);
+  useEffect(() => {
+    StatusBar.setBackgroundColor("#f2f2f2");
   }, []);
 
   const onSubmit = () => {
