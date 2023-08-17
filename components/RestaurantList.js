@@ -24,6 +24,7 @@ const RestaurantList = ({ searchTerm = king, searchRestaurants }) => {
   if (showRestaurants.length === 0) {
     showRestaurants = restaurants;
   }
+  const restLength = showRestaurants.length;
 
   useEffect(() => {
     dispatch(fetchRestaurants());
@@ -36,7 +37,7 @@ const RestaurantList = ({ searchTerm = king, searchRestaurants }) => {
       ) : (
         <View>
           <Text className="text-black text-xl font-bold">
-            {showRestaurants.length} restaurants to explore
+            {restLength} restaurant{restLength === 1 ? "" : "s"} to explore
           </Text>
 
           {showRestaurants.map((item) => {

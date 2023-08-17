@@ -38,8 +38,8 @@ const MenuItem = ({
         </View>
         <Text className="text-xl font-bold">{title}</Text>
         <Text className="text-xl text-gray-500">₹{price}</Text>
-        <View className="flex-row items-center">
-          <MaterialIcons name="stars" size={20} color="#FFC000" />
+        <View className="flex-row items-center space-x-1">
+          <MaterialIcons name="stars" size={20} color="#007829" />
           <Text className="text-gray-500 my-2">
             {ratings} ({noOfRatings})
           </Text>
@@ -128,7 +128,7 @@ const MenuItem = ({
                 <Text className="text-xl font-bold">{title}</Text>
                 <Text className="text-xl text-gray-500 mt-2">₹{price}</Text>
                 <View className="flex-row items-center -mb-3">
-                  <MaterialIcons name="stars" size={20} color="#FFC000" />
+                  <MaterialIcons name="stars" size={20} color="#007829" />
                   <Text className="text-gray-500 my-2">
                     {ratings} ({noOfRatings})
                   </Text>
@@ -157,7 +157,7 @@ const MenuItem = ({
                 </Pressable>
               )}
             </View>
-            <Text className="bg-white text-gray-500 my-4">
+            <Text className="bg-white text-gray-500 my-4 pb-6">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </Text>

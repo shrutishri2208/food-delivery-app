@@ -69,7 +69,7 @@ const RestaurantScreen = () => {
   };
 
   return (
-    <SafeAreaView className="h-full">
+    <SafeAreaView className="h-full pb-8">
       <TouchableOpacity
         className="p-4"
         onPress={() => {
@@ -82,7 +82,7 @@ const RestaurantScreen = () => {
         <View className="bg-gray-200 m-4 mt-0 p-4 rounded-3xl relative ">
           <Text className="text-2xl font-bold">{title}</Text>
           <View className="flex-row items-center space-x-1 mt-1 ">
-            <MaterialIcons name="stars" size={20} color="#FFC000" />
+            <MaterialIcons name="stars" size={20} color="#007829" />
             <Text className="text-black font-bold">
               {ratings} ({noOfRatings} + ratings) • ₹{price} for two
             </Text>
@@ -90,13 +90,13 @@ const RestaurantScreen = () => {
           <View style={styles.line} className="py-2">
             <Text className="text-gray-500">{category}</Text>
           </View>
-          <View className="absolute top-5 right-5 ">
+          {/* <View className="absolute top-5 right-5 ">
             {liked ? (
               <FontAwesome name="heart" size={20} color="maroon" />
             ) : (
               <FontAwesome name="heart-o" size={20} color="maroon" />
             )}
-          </View>
+          </View> */}
           <View className="flex-row mt-2">
             <Text className="font-bold mr-6">Outlet</Text>
             <Text className="">{address}</Text>
@@ -173,7 +173,7 @@ const RestaurantScreen = () => {
         </View>
       </ScrollView>
       {cartItems.length !== 0 && (
-        <View className="bottom-2 absolute left-0 right-0 mx-2">
+        <View className="bottom-8 absolute left-0 right-0 mx-2">
           <View className="bg-green-700 flex-row justify-between p-4 rounded-2xl">
             <View>
               <Text className="text-white font-bold text-lg">

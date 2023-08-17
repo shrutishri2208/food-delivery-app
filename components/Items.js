@@ -1,5 +1,12 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Button,
+  Pressable,
+} from "react-native";
+import React, { useState } from "react";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { urlFor } from "../sanity";
 import { useNavigation } from "@react-navigation/native";
@@ -22,6 +29,7 @@ const Items = ({
   menu,
 }) => {
   const navigation = useNavigation();
+  const [isLiked, setIsLiked] = useState(false);
 
   return (
     <TouchableOpacity
@@ -51,16 +59,21 @@ const Items = ({
         style={{ height: 180, width: 140 }}
         className="rounded-2xl"
       />
-      <View className="absolute top-2 right-2">
-        {liked ? (
-          <FontAwesome name="heart" size={20} color="white" />
-        ) : (
-          <FontAwesome name="heart-o" size={20} color="white" />
-        )}
-      </View>
+      <Pressable
+        onPress={() => setIsLiked(!isLiked)}
+        className="absolute top-2 right-2"
+      >
+        <View className="">
+          {isLiked ? (
+            <FontAwesome name="heart" size={20} color="white" />
+          ) : (
+            <FontAwesome name="heart-o" size={20} color="white" />
+          )}
+        </View>
+      </Pressable>
       <Text className="text-black text-lg p-1 font-bold">{title}</Text>
       <View className="flex-row items-center space-x-1">
-        <MaterialIcons name="stars" size={20} color="#ffcc00" />
+        <MaterialIcons name="stars" size={20} color="#007829" />
         <Text className="text-black">
           {ratings} • {time} mins
         </Text>

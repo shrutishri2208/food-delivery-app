@@ -43,7 +43,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView>
-      <View className=" h-full p-4 bg-gray-100">
+      <View className=" h-full p-4 pb-8 bg-gray-100">
         {/* HEADER */}
         <View className=" header flex flex-row items-center justify-between pb-4 relative">
           <View className="flex flex-row items-center">
@@ -52,7 +52,7 @@ const HomeScreen = () => {
             </View>
             <View className="ml-2">
               <Text className="text-xl font-bold text-black">
-                Mathikere <AntDesign name="down" size={14} color="black" />
+                Home <AntDesign name="down" size={14} color="black" />
               </Text>
 
               <Text className="text-xs text-gray-400">

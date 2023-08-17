@@ -45,7 +45,7 @@ const CartScreen = () => {
           navigation.goBack();
         }}
       >
-        <AntDesign name="arrowleft" size={24} color="#555555" />
+        {/* <AntDesign name="arrowleft" size={24} color="#555555" /> */}
       </TouchableOpacity>
       {cartItems.length === 0 ? (
         <View className="flex h-full justify-center bottom-20 items-center">
